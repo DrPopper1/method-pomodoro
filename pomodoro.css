@@ -3,10 +3,12 @@
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
+    font-size: 18px;
 }
 
 :root {
    --margin: 20px;
+   --main-color: #b84141;
 }
 
 header, .timer-container, .todo-list-container, footer {
@@ -22,9 +24,13 @@ header {
     padding: 5px 0;
     width: 100vw;
     height: 7vh;
-    background-color: #af4545;
+    background-color: var(--main-color);
     margin-bottom: var(--margin);
     border-bottom: 2px solid #fa0000;
+}
+
+h1 {
+    font-size: 30px;
 }
 
 body {
@@ -38,38 +44,57 @@ body {
 
 main {
     height: 90vh;
-    width: 60vw;
+    width: 50vw;
+}
+
+.timer-container, .todo-list-container, footer {
+    width: 50vw;
+    border-radius: 20px;
+    border: #fa0000 2px solid;
+    padding: 20px;
 }
 
 .timer-container {
-    width: 60vw;
     height: 20vh;
-    border: #fa0000 2px solid;
     margin-bottom: var(--margin);
     display: grid;
     justify-items: center;
-    background-color: #e25151;
-    padding: 5px;
+    background-color: var(--main-color);
 }
 
 .todo-list-container {
-    width: 60vw;
     height: 44vh;
-    border: #fa0000 2px solid;
     margin-bottom: var(--margin);
 }
 
 footer {
-    width: 60vw;
     height: 20vh;
-    border: #fa0000 2px solid;
     margin-bottom: var(--margin);
 }
 
 .settings-and-other-buttons {
-    width: 59vw;
+    width: 46vw;
     height: 4vh;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 0 7px;
+}
+
+.timer {
+    font-size: 70px;
+    width: 46vw;
+    height: 7vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.start, .stop {
+    width: 14vw;
+}
+
+.start {
+    margin-right: 15px;
 }
