@@ -5,18 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Метод помидора</title>
     <link rel="stylesheet" type="text/css" href="pomodoro.css">
+    <link rel="shortcut icon" href="img/533tomato_100803.ico">
 </head>
 <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
 
     <header>
         <h1>Метод помидора</h1>
     </header>
 
-    <div class="pomodoro-container">
-        <div class="timer-container"></div>
-        <div class="buttons-container"></div>
-    </div>
+    <main>
+        <div class="timer-container">
+            <div class="settings-and-other-buttons">
+                <div class="settings"></div>
+                <div class="pomodoro"></div>
+            </div>
 
-    <script src="script.js"></script>
+            <div class="timer"></div>
+
+            <div class="buttons">
+                <button class="start">СТАРТ</button>
+                <button class="stop">СТОП</button>
+            </div>
+        </div>
+        <div class="todo-list-container">
+            <input class="todo-list-input">
+            <div class="todo-list"></div>
+            <div class="todo-complited"></div>
+        </div>
+
+        <footer></footer>
+    </main>
+
+    <script src="pomodoro.js"></script>
 </body>
 </html>
