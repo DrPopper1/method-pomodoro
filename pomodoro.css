@@ -1,0 +1,30 @@
+* {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+h1, h2 {
+    text-shadow: -5px -5px 35px rgba(255, 252, 252, 0.1),
+                5px 5px 35px rgba(255, 252, 252, 0.1);
+}
+
+body, .loader-container, header, .start-button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+body {
+    background: #1e1e1e;
+    color: white;
+    height: 100vh;
+}
+
+header {
+    position: absolute;
+    top: 0;
+    width: 100vw;
+}
