@@ -5,16 +5,26 @@
     box-sizing: border-box;
 }
 
-h1, h2 {
-    text-shadow: -5px -5px 35px rgba(255, 252, 252, 0.1),
-                 5px 5px 35px rgba(255, 252, 252, 0.1);
+:root {
+   --margin: 20px;
 }
 
-body, header {
+header, .timer-container, .todo-list-container, footer {
+    box-shadow: -5px -5px 35px rgba(255, 252, 252, 0.1),
+                5px 5px 35px rgba(255, 252, 252, 0.1);;
+}
+
+header {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 5px 0;
+    width: 100vw;
+    height: 7vh;
+    background-color: #af4545;
+    margin-bottom: var(--margin);
+    border-bottom: 2px solid #fa0000;
 }
 
 body {
@@ -23,17 +33,31 @@ body {
     background: #1e1e1e;
     color: white;
     height: 100vh;
-}
-
-header {
-    padding: 5px 0;
     width: 100vw;
-    background-color: #5e3c3c;
-    margin-bottom: 20px;
-    border-bottom: 2px solid #816161;
 }
 
 main {
+    height: 90vh;
     width: 60vw;
-    height: 100vh;
+}
+
+.timer-container {
+    width: 60vw;
+    height: 20vh;
+    border: #fa0000 2px solid;
+    margin-bottom: var(--margin);
+}
+
+.todo-list-container {
+    width: 60vw;
+    height: 44vh;
+    border: #fa0000 2px solid;
+    margin-bottom: var(--margin);
+}
+
+footer {
+    width: 60vw;
+    height: 20vh;
+    border: #fa0000 2px solid;
+    margin-bottom: var(--margin);
 }
