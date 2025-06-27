@@ -46,6 +46,10 @@ main {
     height: 20vh;
     border: #fa0000 2px solid;
     margin-bottom: var(--margin);
+    display: grid;
+    justify-items: center;
+    background-color: #e25151;
+    padding: 5px;
 }
 
 .todo-list-container {
@@ -60,4 +64,12 @@ footer {
     height: 20vh;
     border: #fa0000 2px solid;
     margin-bottom: var(--margin);
+}
+
+.settings-and-other-buttons {
+    width: 59vw;
+    height: 4vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
