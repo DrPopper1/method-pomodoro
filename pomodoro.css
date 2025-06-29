@@ -48,6 +48,7 @@ main {
 }
 
 .timer-container, .todo-list-container, footer {
+    background-color: #222121;
     width: 50vw;
     border-radius: 20px;
     padding: 15px;
@@ -141,4 +142,5 @@ footer {
 
 .secret-slide {
     margin: 0 20px;
+    display: none;
 }
