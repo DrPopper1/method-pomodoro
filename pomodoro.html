@@ -17,7 +17,7 @@
     <main>
         <div class="timer-container">
             <div class="settings-and-other-buttons">
-                <div class="settings">
+                <div class="settings" title="Настройки">
                     <img src="img/Settings-80_icon-icons.com_57272.ico">
                 </div>
                 <div class="pomodoro">
@@ -29,14 +29,24 @@
             <div class="timer">25:00</div>
 
             <div class="buttons">
-                <button class="start">СТАРТ</button>
-                <button class="stop">СТОП</button>
+                <button class="start" title="Начать отсчет">СТАРТ</button>
+                <button class="stop" title="Закончить отсчет">СТОП</button>
             </div>
         </div>
         <div class="todo-list-container">
-            <input class="todo-list-input">
-            <div class="todo-list"></div>
-            <div class="todo-complited"></div>
+            <input class="todo-list-input" type="text" inputmode="text" placeholder="Описание цели" title="Напишите описание">
+            <div class="todo-list">
+                <div class="todo-item">
+                    <div class="text">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</div>
+                    <button class="todo-button" title="Меню">...</button>
+                </div>
+            </div>
+            <div class="todo-completed">
+                <div class="todo-item">
+                    <div class="text">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</div>
+                    <button class="todo-button" title="Меню">...</button>
+                </div>
+            </div>
         </div>
 
         <footer></footer>
