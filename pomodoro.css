@@ -81,13 +81,16 @@ footer {
 }
 
 .timer {
-    font-size: 70px;
     width: 46vw;
     height: 7vh;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 10px;
+}
+
+.timer, .timer span {
+    font-size: 70px;
 }
 
 .start, .stop {
