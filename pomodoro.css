@@ -50,7 +50,6 @@ main {
 .timer-container, .todo-list-container, footer {
     width: 50vw;
     border-radius: 20px;
-    border: #fa0000 2px solid;
     padding: 15px;
 }
 
@@ -106,10 +105,9 @@ footer {
 
 .todo-list, .todo-completed {
     width: 48vw;
-    border: #b84141 2px solid;
     margin-top: 10px;
     border-radius: 10px;
-    padding: 10px;
+    padding: 10px 0 0 0;
 }
 
 .todo-item {
@@ -133,4 +131,14 @@ footer {
     height: 25px;
     padding: 5px 0;
     font-size: 12px;
+}
+
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.secret-slide {
+    margin: 0 20px;
 }
