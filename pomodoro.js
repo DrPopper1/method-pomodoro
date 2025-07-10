@@ -15,6 +15,23 @@ const pomodoro = document.querySelector('.pomodoro');
 const settings = document.querySelector('.settings');
 const panel = document.querySelector('.panel');
 
+const var1 = document.querySelector('#var1');
+const var2 = document.querySelector('#var2');
+const var3 = document.querySelector('#var3');
+const var4 = document.querySelector('#var4');
+
+let variable_1 = 25;
+let variable_2 = 5;
+let variable_3 = 15;
+let variable_4 = 4;
+settingsUpdate();
+
+variable_1 = JSON.parse(localStorage.getItem('variables'))[0];
+variable_2 = JSON.parse(localStorage.getItem('variables'))[1];
+variable_3 = JSON.parse(localStorage.getItem('variables'))[2];
+variable_4 = JSON.parse(localStorage.getItem('variables'))[3];
+time = variable_1;
+
 function updateDisplay() {
     const time_min = Math.floor(time / 60);
     const time_sec = time - time_min * 60;
@@ -54,15 +71,15 @@ pomodoro.addEventListener('click', function() {
     } else {
         koin++
     }
-    if (parseInt(pomodoro_span.innerHTML) === 4 & koin === 1) {
-        time_back(15, "#2ca71b");
-    } else if (parseInt(pomodoro_span.innerHTML) === 5) {
+    if (parseInt(pomodoro_span.innerHTML) === variable_4 & koin === 1) {
+        time_back(variable_3, "#2ca71b");
+    } else if (parseInt(pomodoro_span.innerHTML) === variable_4 + 1) {
         pomodoro_span.innerHTML = 1;
-        time_back(25, "#b84141");
+        time_back(variable_1, "#b84141");
     } else if (isRest === true) {
-        time_back(5, "#2ca71b");
+        time_back(variable_2, "#2ca71b");
     } else {
-        time_back(25, "#b84141");
+        time_back(variable_1, "#b84141");
     }
 });
 
@@ -87,9 +104,9 @@ start_button.addEventListener('click', function() {
                     koin++
                 }
                 if (koin === 1) {
-                    time_back(5, "#2ca71b");
+                    time_back(variable_2, "#2ca71b");
                 } else {
-                    time_back(25, "#b84141");
+                    time_back(variable_1, "#b84141");
                 }
                 alert("Время вышло!");
             }
@@ -99,11 +116,11 @@ start_button.addEventListener('click', function() {
             clearInterval(start_timer);
             isRunning = false;
             if (koin === 0) {
-                time_back(25, 0);
-            } else if (parseInt(pomodoro_span.innerHTML) === 4) {
-                time_back(15, 0);
+                time_back(variable_1, 0);
+            } else if (parseInt(pomodoro_span.innerHTML) === variable_4) {
+                time_back(variable_3, 0);
             } else {
-                time_back(5, 0);
+                time_back(variable_2, 0);
             }
             stop_button.disabled = true;
         });
@@ -118,7 +135,7 @@ function time_back(minutes, back) {
     if (back != 0) {
         timer_container.style.background = back;
     }
-    if (minutes === 5) {
+    if (minutes <= 9) {
         min.innerHTML = `0${minutes}`;
     } else {
         min.innerHTML = minutes;
@@ -127,5 +144,32 @@ function time_back(minutes, back) {
 }
 
 settings.addEventListener('click', function() {
-    panel.style.display
+    if (panel.style.display == "none") {
+        panel.style.display = "grid";
+        console.log('none')
+    } else {
+        panel.style.display = "none";
+    }
 })
+
+function settingsUpdate() {
+    const var1 = document.querySelector('#var1');
+    const var2 = document.querySelector('#var2');
+    const var3 = document.querySelector('#var3');
+    const var4 = document.querySelector('#var4');
+    if (var1.value != "" & var1.value != null & var1.value != undefined & var1.value != isNaN) {
+        variable_1 = var1.value;
+    }
+    if (var2.value != "" & var2.value != null & var2.value != undefined & var2.value != isNaN) {
+        variable_2 = var2.value;
+    }
+    if (var3.value != "" & var3.value != null & var3.value != undefined & var3.value != isNaN) {
+        variable_3 = var3.value;
+    }
+    if (var4.value != "" & var4.value != null & var4.value != undefined & var4.value != isNaN) {
+        variable_4 = var4.value;
+    }
+    variables = [variable_1, variable_2, variable_3, variable_4];
+    localStorage.setItem('variables', JSON.stringify(variables));
+    updateDisplay();
+}
