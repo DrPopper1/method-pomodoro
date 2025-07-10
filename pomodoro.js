@@ -12,6 +12,8 @@ const min = document.querySelector('.min');
 const sec = document.querySelector('.sec');
 const timer_container = document.querySelector('.timer-container');
 const pomodoro = document.querySelector('.pomodoro');
+const settings = document.querySelector('.settings');
+const panel = document.querySelector('.panel');
 
 function updateDisplay() {
     const time_min = Math.floor(time / 60);
@@ -123,3 +125,7 @@ function time_back(minutes, back) {
     }
     sec.innerHTML = "00";
 }
+
+settings.addEventListener('click', function() {
+    panel.style.display
+})

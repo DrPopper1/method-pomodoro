@@ -17,9 +17,9 @@
     <main>
         <div class="timer-container">
             <div class="settings-and-other-buttons">
-                <div class="settings" title="Настройки">
+                <button class="settings" title="Настройки">
                     <img src="img/Settings-80_icon-icons.com_57272.ico">
-                </div>
+                </button>
                 <button class="pomodoro" title="Далее">
                     Помидор
                     (<span class="pomodoro-span">1</span>)
@@ -31,6 +31,25 @@
             <div class="buttons">
                 <button class="start" title="Начать отсчет">Старт</button>
                 <button class="stop" title="Закончить отсчет">Стоп</button>
+            </div>
+
+            <div class="panel">
+                <div class="input-container">
+                    <div class="input-text">Продолжительность помидора:</div>
+                    <div class="input"><input type="number" inputmode="numeric" placeholder="Число" title="Число"></div>
+                </div>
+                <div class="input-container">
+                    <div class="input-text">Продолжительность короткого перерыва:</div>
+                    <div class="input"><input type="number" inputmode="numeric" placeholder="Число" title="Число"></div>
+                </div>
+                <div class="input-container">
+                    <div class="input-text">Продолжительность длинного перерыва:</div>
+                    <div class="input"><input type="number" inputmode="numeric" placeholder="Число" title="Число"></div>
+                </div>
+                <div class="input-container">
+                    <div class="input-text">Длинный перерыв через каждые:</div>
+                    <div class="input"><input type="number" inputmode="numeric" placeholder="Число" title="Число"></div>
+                </div>
             </div>
         </div>
         <div class="todo-list-container">

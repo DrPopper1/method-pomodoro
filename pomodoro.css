@@ -23,7 +23,7 @@ header {
     justify-content: center;
     padding: 5px 0;
     width: 100vw;
-    height: 7vh;
+    height: 7dvh;
     background-color: var(--main-color);
     margin-bottom: var(--margin);
     border-bottom: 2px solid #fa0000;
@@ -38,12 +38,12 @@ body {
     justify-items: center;
     background: #1e1e1e;
     color: white;
-    height: 100vh;
+    height: 100dvh;
     width: 100vw;
 }
 
 main {
-    height: 90vh;
+    height: 90dvh;
     width: 50vw;
 }
 
@@ -73,7 +73,7 @@ footer {
 
 .settings-and-other-buttons {
     width: 46vw;
-    height: 4vh;
+    height: 4dvh;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -82,7 +82,7 @@ footer {
 
 .timer {
     width: 46vw;
-    height: 7vh;
+    height: 7dvh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -103,7 +103,7 @@ footer {
 
 .todo-list-input {
     width: 48vw;
-    height: 4vh;
+    height: 4dvh;
     border-radius: 10px;
 }
 
@@ -137,7 +137,7 @@ footer {
     font-size: 12px;
 }
 
-footer {
+footer, .settings {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -146,4 +146,23 @@ footer {
 .secret-slide {
     margin: 0 20px;
     display: none;
+}
+
+.panel {
+    display: none;
+    position: absolute;
+    top: 25dvh;
+    width: 25vw;
+    background-color: #1e1e1e;
+    padding: 20px;
+    height: 50dvh;
+    display: grid;
+    justify-items: center;
+    border: white 2px solid;
+}
+
+.input-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
