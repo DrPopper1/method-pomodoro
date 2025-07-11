@@ -7,27 +7,27 @@ const timer_container = document.querySelector('.timer-container');
 const pomodoro = document.querySelector('.pomodoro');
 const settings = document.querySelector('.settings');
 const panel = document.querySelector('.panel');
-const var1 = document.querySelector('#var1');
-const var2 = document.querySelector('#var2');
-const var3 = document.querySelector('#var3');
-const var4 = document.querySelector('#var4');
+// const var1 = document.querySelector('#var1');
+// const var2 = document.querySelector('#var2');
+// const var3 = document.querySelector('#var3');
+// const var4 = document.querySelector('#var4');
 
 let time = 0;
 let start_timer = null;
 let isRunning = false;
 let isRest = false;
-let variable_1 = 0;
-let variable_2 = 0;
-let variable_3 = 0;
-let variable_4 = 0;
-let variables = [];
+// let variable_1 = 0;
+// let variable_2 = 0;
+// let variable_3 = 0;
+// let variable_4 = 0;
+// let variables = [];
 
 start_button.addEventListener('click', function() {
     if (!isRunning) {
         button_opt("Пауза", "Остановить отсчет");
         stop_button.disabled = false;
         isRunning = true;
-        parseInt(min.innerHTML) * 60 + parseInt(sec.innerHTML);
+        time = parseInt(min.innerHTML) * 60 + parseInt(sec.innerHTML);
         start_timer = setInterval(() => {
             time--;
             updateDisplay();
@@ -37,15 +37,14 @@ start_button.addEventListener('click', function() {
                 isRunning = false;
                 isRest = !isRest;
                 if (isRest === true) {
-                    time_back(variable_2, "#2ca71b");
+                    time_back(parseInt(variable_2), "#2ca71b");
                     isRest = false;
                 } else {
-                    time_back(variable_1, "#b84141");
+                    time_back(parseInt(variable_1), "#b84141");
                     isRest = true;
                     pomodoro_span.innerHTML = parseInt(pomodoro_span.innerHTML) + 1;
                 }
                 alert("Время вышло!");
-                updateDisplay();
             }
         }, 1000);
         stop_button.addEventListener('click', function() {
@@ -54,11 +53,11 @@ start_button.addEventListener('click', function() {
             isRunning = false;
             isRest = !isRest;
             if (isRest === true) {
-                time_back(variable_2, 0);
+                time_back(parseInt(variable_2), 0);
             } else if (parseInt(pomodoro_span.innerHTML) === variable_4) {
-                time_back(variable_3, 0);
+                time_back(parseInt(variable_3), 0);
             } else {
-                time_back(variable_1, 0);
+                time_back(parseInt(variable_1), 0);
             }
             stop_button.disabled = true;
         });
@@ -82,54 +81,54 @@ pomodoro.addEventListener('click', function() {
         isRest = true;
     }
     if (parseInt(pomodoro_span.innerHTML) === parseInt(variable_4) & isRest === true) {
-        time_back(variable_3, "#2ca71b");
+        time_back(parseInt(variable_3), "#2ca71b");
     } else if (parseInt(pomodoro_span.innerHTML) === parseInt(variable_4) + 1) {
         pomodoro_span.innerHTML = 1;
-        time_back(variable_1, "#b84141");
+        time_back(parseInt(variable_1), "#b84141");
     } else if (isRest === true) {
-        time_back(variable_2, "#2ca71b");
+        time_back(parseInt(variable_2), "#2ca71b");
     } else {
-        time_back(variable_1, "#b84141");
+        time_back(parseInt(variable_1), "#b84141");
     }
 });
 
-function settingsUpdate() {
-    if (localStorage.getItem('variables')) {
-        variable_1 = JSON.parse(localStorage.getItem('variables'))[0];
-        variable_2 = JSON.parse(localStorage.getItem('variables'))[1];
-        variable_3 = JSON.parse(localStorage.getItem('variables'))[2];
-        variable_4 = JSON.parse(localStorage.getItem('variables'))[3];
-        if (var1.value != "" & var1.value != null & var1.value != undefined & var1.value != isNaN) {
-            variable_1 = var1.value;
-        } else {
-            variable_1 = 25;
-        }
-        if (var2.value != "" & var2.value != null & var2.value != undefined & var2.value != isNaN) {
-            variable_2 = var2.value;
-        } else {
-            variable_2 = 5;
-        }
-        if (var3.value != "" & var3.value != null & var3.value != undefined & var3.value != isNaN) {
-            variable_3 = var3.value;
-        } else {
-            variable_3 = 15;
-        }
-        if (var4.value != "" & var4.value != null & var4.value != undefined & var4.value != isNaN) {
-            variable_4 = var4.value;
-        } else {
-            variable_4 = 4;
-        }
-    } else {
-        variable_1 = 25;
-        variable_2 = 5;
-        variable_3 = 15;
-        variable_4 = 4;
-    }
-    variables = [variable_1, variable_2, variable_3, variable_4];
-    localStorage.setItem('variables', JSON.stringify(variables));
-    time = variable_1 * 60;
-    updateDisplay();
-};
+// function settingsUpdate() {
+//     if (localStorage.getItem('variables')) {
+//         variable_1 = JSON.parse(localStorage.getItem('variables'))[0] * 60;
+//         variable_2 = JSON.parse(localStorage.getItem('variables'))[1] * 60;
+//         variable_3 = JSON.parse(localStorage.getItem('variables'))[2] * 60;
+//         variable_4 = JSON.parse(localStorage.getItem('variables'))[3] * 60;
+//         if (var1.value != "" & var1.value != null & var1.value != undefined & var1.value != isNaN) {
+//             variable_1 = parseInt(var1.value) * 60;
+//         } else {
+//             variable_1 = 25 * 60;
+//         }
+//         if (var2.value != "" & var2.value != null & var2.value != undefined & var2.value != isNaN) {
+//             variable_2 = parseInt(var2.value) * 60;
+//         } else {
+//             variable_2 = 5 * 60;
+//         }
+//         if (var3.value != "" & var3.value != null & var3.value != undefined & var3.value != isNaN) {
+//             variable_3 = parseInt(var3.value) * 60;
+//         } else {
+//             variable_3 = 15 * 60;
+//         }
+//         if (var4.value != "" & var4.value != null & var4.value != undefined & var4.value != isNaN) {
+//             variable_4 = parseInt(var4.value) * 60;
+//         } else {
+//             variable_4 = 4 * 60;
+//         }
+//     } else {
+//         variable_1 = 25 * 60;
+//         variable_2 = 5 * 60;
+//         variable_3 = 15 * 60;
+//         variable_4 = 4 * 60;
+//     }
+//     variables = [variable_1, variable_2, variable_3, variable_4];
+//     localStorage.setItem('variables', JSON.stringify(variables));
+//     time = parseInt(variable_1);
+//     updateDisplay();
+// };
 
 function updateDisplay() {
     const time_min = Math.floor(time / 60);
@@ -163,17 +162,43 @@ function button_opt(inner, title) {
     start_button.title = title;
 }
 
-function time_back(minutes, back) {
-    if (back != 0) {
-        timer_container.style.background = back;
-    }
-    if (minutes <= 9) {
-        min.innerHTML = `0${minutes}`;
-    } else {
-        min.innerHTML = minutes;
-    }
-    sec.innerHTML = "00";
-}
+// function time_back(minutes, back) {
+//     if (back != 0) {
+//         timer_container.style.background = back;
+//     }
+//     if ((minutes %= 0) != 0) {
+//         const time_min = Math.floor(minutes / 60);
+//         const time_sec = minutes - time_min * 60;
+//         console.log(time_min, time_sec)
+//         if (minutes <= 9 & minutes >= 1) {
+//             min.innerHTML = `0${time_min}`;
+//             if (time_sec > 9) {
+//                 sec.innerHTML = time_sec;
+//             } else {
+//                 sec.innerHTML = `0${time_sec}`;
+//             }
+//         } else if (minutes > 10) {
+//             min.innerHTML = time_min;
+//             if (time_sec > 9) {
+//                 sec.innerHTML = time_sec;
+//             } else {
+//                 sec.innerHTML = `0${time_sec}`;
+//             }
+//         } else {
+//             if (time_sec > 9) {
+//                 sec.innerHTML = time_sec;
+//             } else {
+//                 sec.innerHTML = `0${time_sec}`;
+//             }
+//         }
+//     } else if (minutes <= 9) {
+//         min.innerHTML = `0${minutes}`;
+//         sec.innerHTML = "00";
+//     } else {
+//         min.innerHTML = minutes;
+//         sec.innerHTML = "00";
+//     }
+// }
 
 settings.addEventListener('click', function() {
     if (panel.style.display == "none") {
