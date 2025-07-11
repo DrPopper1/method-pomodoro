@@ -16,7 +16,6 @@ let time = 0;
 let start_timer = null;
 let isRunning = false;
 let isRest = false;
-let koin = 0;
 let variable_1 = 0;
 let variable_2 = 0;
 let variable_3 = 0;
@@ -28,7 +27,7 @@ start_button.addEventListener('click', function() {
         button_opt("Пауза", "Остановить отсчет");
         stop_button.disabled = false;
         isRunning = true;
-        time = parseInt(min.innerHTML) * 60 + parseInt(sec.innerHTML);
+        parseInt(min.innerHTML) * 60 + parseInt(sec.innerHTML);
         start_timer = setInterval(() => {
             time--;
             updateDisplay();
@@ -36,28 +35,30 @@ start_button.addEventListener('click', function() {
                 clearInterval(start_timer);
                 button_opt("Старт", "Начать отсчет");
                 isRunning = false;
-                if (koin === 1) {
-                    isRest = false;
-                    pomodoro_span.innerHTML = parseInt(pomodoro_span.innerHTML) + 1;
+                isRest = !isRest;
+                if (isRest === true) {
                     time_back(variable_2, "#2ca71b");
-                    koin--
+                    isRest = false;
                 } else {
                     time_back(variable_1, "#b84141");
-                    koin++
+                    isRest = true;
+                    pomodoro_span.innerHTML = parseInt(pomodoro_span.innerHTML) + 1;
                 }
                 alert("Время вышло!");
+                updateDisplay();
             }
         }, 1000);
         stop_button.addEventListener('click', function() {
             button_opt("Старт", "Начать отсчет");
             clearInterval(start_timer);
             isRunning = false;
-            if (koin === 0) {
-                time_back(variable_1, 0);
+            isRest = !isRest;
+            if (isRest === true) {
+                time_back(variable_2, 0);
             } else if (parseInt(pomodoro_span.innerHTML) === variable_4) {
                 time_back(variable_3, 0);
             } else {
-                time_back(variable_2, 0);
+                time_back(variable_1, 0);
             }
             stop_button.disabled = true;
         });
@@ -74,15 +75,15 @@ pomodoro.addEventListener('click', function() {
     isRunning = false;
     isRest = !isRest;
     stop_button.disabled = true;
-    if (koin === 1) {
+    if (isRest === true) {
         pomodoro_span.innerHTML = parseInt(pomodoro_span.innerHTML) + 1;
-        koin--
+        isRest = false;
     } else {
-        koin++
+        isRest = true;
     }
-    if (parseInt(pomodoro_span.innerHTML) === variable_4 & koin === 1) {
+    if (parseInt(pomodoro_span.innerHTML) === parseInt(variable_4) & isRest === true) {
         time_back(variable_3, "#2ca71b");
-    } else if (parseInt(pomodoro_span.innerHTML) === variable_4 + 1) {
+    } else if (parseInt(pomodoro_span.innerHTML) === parseInt(variable_4) + 1) {
         pomodoro_span.innerHTML = 1;
         time_back(variable_1, "#b84141");
     } else if (isRest === true) {
@@ -135,18 +136,23 @@ function updateDisplay() {
     const time_sec = time - time_min * 60;
 
     if (time_sec == 0) {
+        console.log(time_min, time_sec);
         min.innerHTML = time_min;
         sec.innerHTML = "00";
     } else if (time_sec < 10 & time_min < 10) {
+        console.log(time_min, time_sec);
         min.innerHTML = `0${time_min}`;
         sec.innerHTML = `0${time_sec}`;
     } else if (time_sec < 10) {
+        console.log(time_min, time_sec);
         min.innerHTML = time_min;
         sec.innerHTML = `0${time_sec}`;
     } else if (time_min < 10) {
+        console.log(time_min, time_sec);
         min.innerHTML = `0${time_min}`
         sec.innerHTML = time_sec;
     } else {
+        console.log(time_min, time_sec);
         min.innerHTML = time_min;
         sec.innerHTML = time_sec;
     }
