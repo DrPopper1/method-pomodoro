@@ -12,6 +12,7 @@ const var2 = document.querySelector('#var2');
 const var3 = document.querySelector('#var3');
 const var4 = document.querySelector('#var4');
 
+stop_button.disabled = true;
 let isRunning = false;
 let isRest = false;
 let start_timer;
@@ -90,15 +91,20 @@ function updateDisplay() {
     console.log(`${time_min}:${time_sec}`);
 }
 
-function button_opt(inner, title) {
+function time_color(back) {
+    timer_container.style.background = back;
+    updateDisplay();
+}
+
+function button_opt(inner, title, dis) {
     start_button.innerHTML = inner;
     start_button.title = title;
+    stop_button.disabled = dis;
 }
 
 start_button.addEventListener('click', function() {
-    if (!isRunning) {
-        button_opt("Пауза", "Остановить отсчет");
-        stop_button.disabled = false;
+    if (isRunning === false) {
+        button_opt("Пауза", "Остановить отсчет", false);
         isRunning = true;
         time = parseInt(min.innerHTML) * 60 + parseInt(sec.innerHTML);
         start_timer = setInterval(() => {
@@ -106,14 +112,14 @@ start_button.addEventListener('click', function() {
             updateDisplay();
             if (time === 0) {
                 clearInterval(start_timer);
-                button_opt("Старт", "Начать отсчет");
+                button_opt("Старт", "Начать отсчет", true);
                 isRunning = false;
                 isRest = !isRest;
                 if (isRest === true) {
-                    time_back(parseInt(variable_2), "#2ca71b");
+                    time_color("#2ca71b");
                     isRest = false;
                 } else {
-                    time_back(parseInt(variable_1), "#b84141");
+                    time_color("#b84141");
                     isRest = true;
                     pomodoro_span.innerHTML = parseInt(pomodoro_span.innerHTML) + 1;
                 }
@@ -121,23 +127,16 @@ start_button.addEventListener('click', function() {
             }
         }, 1000);
         stop_button.addEventListener('click', function() {
-            button_opt("Старт", "Начать отсчет");
+            button_opt("Старт", "Начать отсчет", true);
             clearInterval(start_timer);
             isRunning = false;
-            isRest = !isRest;
-            if (isRest === true) {
-                time_back(parseInt(variable_2), 0);
-            } else if (parseInt(pomodoro_span.innerHTML) === variable_4) {
-                time_back(parseInt(variable_3), 0);
-            } else {
-                time_back(parseInt(variable_1), 0);
-            }
             stop_button.disabled = true;
+            updateDisplay();
         });
     } else {
         isRunning = false;
         clearInterval(start_timer);
-        button_opt("Продолжить", "Продолжить отсчет");
+        button_opt("Продолжить", "Продолжить отсчет", false);
     }
 });
 
@@ -154,59 +153,16 @@ pomodoro.addEventListener('click', function() {
         isRest = true;
     }
     if (parseInt(pomodoro_span.innerHTML) === parseInt(variable_4) & isRest === true) {
-        time_back(parseInt(variable_3), "#2ca71b");
+        time_color("#2ca71b");
     } else if (parseInt(pomodoro_span.innerHTML) === parseInt(variable_4) + 1) {
         pomodoro_span.innerHTML = 1;
-        time_back(parseInt(variable_1), "#b84141");
+        time_color("#b84141");
     } else if (isRest === true) {
-        time_back(parseInt(variable_2), "#2ca71b");
+        time_color("#2ca71b");
     } else {
-        time_back(parseInt(variable_1), "#b84141");
+        time_color("#b84141");
     }
 });
-
-function button_opt(inner, title) {
-    start_button.innerHTML = inner;
-    start_button.title = title;
-}
-
-// function time_back(minutes, back) {
-//     if (back != 0) {
-//         timer_container.style.background = back;
-//     }
-//     if ((minutes %= 0) != 0) {
-//         const time_min = Math.floor(minutes / 60);
-//         const time_sec = minutes - time_min * 60;
-//         console.log(time_min, time_sec)
-//         if (minutes <= 9 & minutes >= 1) {
-//             min.innerHTML = `0${time_min}`;
-//             if (time_sec > 9) {
-//                 sec.innerHTML = time_sec;
-//             } else {
-//                 sec.innerHTML = `0${time_sec}`;
-//             }
-//         } else if (minutes > 10) {
-//             min.innerHTML = time_min;
-//             if (time_sec > 9) {
-//                 sec.innerHTML = time_sec;
-//             } else {
-//                 sec.innerHTML = `0${time_sec}`;
-//             }
-//         } else {
-//             if (time_sec > 9) {
-//                 sec.innerHTML = time_sec;
-//             } else {
-//                 sec.innerHTML = `0${time_sec}`;
-//             }
-//         }
-//     } else if (minutes <= 9) {
-//         min.innerHTML = `0${minutes}`;
-//         sec.innerHTML = "00";
-//     } else {
-//         min.innerHTML = minutes;
-//         sec.innerHTML = "00";
-//     }
-// }
 
 settings.addEventListener('click', function() {
     if (panel.style.display == "none") {
