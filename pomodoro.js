@@ -12,52 +12,66 @@ const var2 = document.querySelector('#var2');
 const var3 = document.querySelector('#var3');
 const var4 = document.querySelector('#var4');
 
-let time = 0;
-let start_timer = null;
 let isRunning = false;
 let isRest = false;
-let time_settings = [25, 5, 15, 4];
+let start_timer;
+let time;
+let time_settings;
+let time_1;
+let time_2;
+let time_3;
+let time_4;
+let time_min;
+let time_sec;
 
 function time_load() {
     if (localStorage.getItem('time_settings')) {
         time_settings = JSON.parse(localStorage.getItem('time_settings'));
-        time_1 = time_settings[0];
-        time_2 = time_settings[1];
-        time_3 = time_settings[2];
+        time_1 = time_settings[0] * 60;
+        time_2 = time_settings[1] * 60;
+        time_3 = time_settings[2] * 60;
         time_4 = time_settings[3];
     }
+    else {
+        time_settings = [25, 5, 15, 4];
+        localStorage.setItem('time_settings', JSON.stringify(time_settings));
+        time_1 = time_settings[0] * 60;
+        time_2 = time_settings[1] * 60;
+        time_3 = time_settings[2] * 60;
+        time_4 = time_settings[3];
+    }
+    time = time_1;
+    updateDisplay();
 }
 
-function next() {
-    if (var1.value != "" & var1.value != null & var1.value != undefined & var1.value != isNaN) {
-        const time_1 = Math.floor(parseInt(var1.value) * 60);
-    } else {
-        const time_1 = 25 * 60;
+function time_setting() {
+    if (var1.value != "" & var1.value != null & var1.value != undefined & var1.value != isNaN & var1.value <= 60) {
+        time_1 = Math.floor(parseInt(var1.value));
     }
-    if (var2.value != "" & var2.value != null & var2.value != undefined & var2.value != isNaN) {
-        const time_2 = Math.floor(parseInt(var2.value) * 60);
-    } else {
-        const time_2 = 5 * 60;
+    if (var2.value != "" & var2.value != null & var2.value != undefined & var2.value != isNaN & var2.value <= 60) {
+        time_2 = Math.floor(parseInt(var2.value));
     }
-    if (var3.value != "" & var3.value != null & var3.value != undefined & var3.value != isNaN) {
-        const time_3 = Math.floor(parseInt(var3.value) * 60);
-    } else {
-        const time_3 = 15 * 60;
+    if (var3.value != "" & var3.value != null & var3.value != undefined & var3.value != isNaN & var3.value <= 60) {
+        time_3 = Math.floor(parseInt(var3.value));
     }
-    if (var4.value != "" & var4.value != null & var4.value != undefined & var4.value != isNaN) {
-        const time_4 = Math.floor(parseInt(var4.value));
-    } else {
-        const time_4 = 4;
+    if (var4.value != "" & var4.value != null & var4.value != undefined & var4.value != isNaN & var4.value <= 60) {
+        time_4 = Math.floor(parseInt(var4.value));
     }
     time_settings = [time_1, time_2, time_3, time_4];
     localStorage.setItem('time_settings', JSON.stringify(time_settings));
-    time = time_1
     updateDisplay();
 }
 
 function updateDisplay() {
-    const time_min = Math.floor(time / 60);
-    const time_sec = time - time_min * 60;
+    if (isRunning === true) {
+        time_min = Math.floor(time / 60);
+    } else if (parseInt(pomodoro_span.innerHTML) === time_4 & isRest === true) {
+        time_min = time_settings;
+    } else if (isRest === true) {
+        time_min = time_settings;
+    } else {
+        time_min = time_settings;
+    }
 
     if (time_sec == 0) {
         console.log(time_min, time_sec);
@@ -274,4 +288,4 @@ settings.addEventListener('click', function() {
     }
 })
 
-settingsUpdate();
+time_load();
