@@ -7,20 +7,85 @@ const timer_container = document.querySelector('.timer-container');
 const pomodoro = document.querySelector('.pomodoro');
 const settings = document.querySelector('.settings');
 const panel = document.querySelector('.panel');
-// const var1 = document.querySelector('#var1');
-// const var2 = document.querySelector('#var2');
-// const var3 = document.querySelector('#var3');
-// const var4 = document.querySelector('#var4');
+const var1 = document.querySelector('#var1');
+const var2 = document.querySelector('#var2');
+const var3 = document.querySelector('#var3');
+const var4 = document.querySelector('#var4');
 
 let time = 0;
 let start_timer = null;
 let isRunning = false;
 let isRest = false;
-// let variable_1 = 0;
-// let variable_2 = 0;
-// let variable_3 = 0;
-// let variable_4 = 0;
-// let variables = [];
+let time_settings = [25, 5, 15, 4];
+
+function time_load() {
+    if (localStorage.getItem('time_settings')) {
+        time_settings = JSON.parse(localStorage.getItem('time_settings'));
+        time_1 = time_settings[0];
+        time_2 = time_settings[1];
+        time_3 = time_settings[2];
+        time_4 = time_settings[3];
+    }
+}
+
+function next() {
+    if (var1.value != "" & var1.value != null & var1.value != undefined & var1.value != isNaN) {
+        const time_1 = Math.floor(parseInt(var1.value) * 60);
+    } else {
+        const time_1 = 25 * 60;
+    }
+    if (var2.value != "" & var2.value != null & var2.value != undefined & var2.value != isNaN) {
+        const time_2 = Math.floor(parseInt(var2.value) * 60);
+    } else {
+        const time_2 = 5 * 60;
+    }
+    if (var3.value != "" & var3.value != null & var3.value != undefined & var3.value != isNaN) {
+        const time_3 = Math.floor(parseInt(var3.value) * 60);
+    } else {
+        const time_3 = 15 * 60;
+    }
+    if (var4.value != "" & var4.value != null & var4.value != undefined & var4.value != isNaN) {
+        const time_4 = Math.floor(parseInt(var4.value));
+    } else {
+        const time_4 = 4;
+    }
+    time_settings = [time_1, time_2, time_3, time_4];
+    localStorage.setItem('time_settings', JSON.stringify(time_settings));
+    time = time_1
+    updateDisplay();
+}
+
+function updateDisplay() {
+    const time_min = Math.floor(time / 60);
+    const time_sec = time - time_min * 60;
+
+    if (time_sec == 0) {
+        console.log(time_min, time_sec);
+        min.innerHTML = time_min;
+        sec.innerHTML = "00";
+    } else if (time_sec < 10 & time_min < 10) {
+        console.log(time_min, time_sec);
+        min.innerHTML = `0${time_min}`;
+        sec.innerHTML = `0${time_sec}`;
+    } else if (time_sec < 10) {
+        console.log(time_min, time_sec);
+        min.innerHTML = time_min;
+        sec.innerHTML = `0${time_sec}`;
+    } else if (time_min < 10) {
+        console.log(time_min, time_sec);
+        min.innerHTML = `0${time_min}`
+        sec.innerHTML = time_sec;
+    } else {
+        console.log(time_min, time_sec);
+        min.innerHTML = time_min;
+        sec.innerHTML = time_sec;
+    }
+}
+
+function button_opt(inner, title) {
+    start_button.innerHTML = inner;
+    start_button.title = title;
+}
 
 start_button.addEventListener('click', function() {
     if (!isRunning) {
