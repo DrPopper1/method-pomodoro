@@ -91,8 +91,9 @@ function updateDisplay() {
     console.log(`${time_min}:${time_sec}`);
 }
 
-function time_color(back) {
+function time_color(back, present_time) {
     timer_container.style.background = back;
+    time = present_time;
     updateDisplay();
 }
 
@@ -115,12 +116,15 @@ start_button.addEventListener('click', function() {
                 button_opt("Старт", "Начать отсчет", true);
                 isRunning = false;
                 isRest = !isRest;
-                if (isRest === true) {
-                    time_color("#2ca71b");
-                    isRest = false;
+                if (pomodoro_span.innerHTML === time_4 & isRest === true) {
+                    time_color("#2ca71b", time_settings[2]);
+                } else if (isRest === true) {
+                    time_color("#2ca71b", time_settings[1]);
+                } else if (parseInt(pomodoro_span.innerHTML) > time_4) {
+                    pomodoro_span.innerHTML = 1;
+                    time_color("#b84141", time_settings[0]);
                 } else {
-                    time_color("#b84141");
-                    isRest = true;
+                    time_color("#b84141", time_settings[0]);
                     pomodoro_span.innerHTML = parseInt(pomodoro_span.innerHTML) + 1;
                 }
                 alert("Время вышло!");
@@ -141,26 +145,20 @@ start_button.addEventListener('click', function() {
 });
 
 pomodoro.addEventListener('click', function() {
-    button_opt("Старт", "Начать отсчет");
+    button_opt("Старт", "Начать отсчет", true);
     clearInterval(start_timer);
     isRunning = false;
     isRest = !isRest;
-    stop_button.disabled = true;
-    if (isRest === true) {
-        pomodoro_span.innerHTML = parseInt(pomodoro_span.innerHTML) + 1;
-        isRest = false;
-    } else {
-        isRest = true;
-    }
-    if (parseInt(pomodoro_span.innerHTML) === parseInt(variable_4) & isRest === true) {
-        time_color("#2ca71b");
-    } else if (parseInt(pomodoro_span.innerHTML) === parseInt(variable_4) + 1) {
-        pomodoro_span.innerHTML = 1;
-        time_color("#b84141");
+    if (pomodoro_span.innerHTML === time_4 & isRest === true) {
+        time_color("#2ca71b", time_settings[2]);
     } else if (isRest === true) {
-        time_color("#2ca71b");
+        time_color("#2ca71b", time_settings[1]);
+    } else if (parseInt(pomodoro_span.innerHTML) >= time_4) {
+        pomodoro_span.innerHTML = 1;
+        time_color("#b84141", time_settings[0]);
     } else {
-        time_color("#b84141");
+        time_color("#b84141", time_settings[0]);
+        pomodoro_span.innerHTML = parseInt(pomodoro_span.innerHTML) + 1;
     }
 });
 
