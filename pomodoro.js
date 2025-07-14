@@ -27,20 +27,16 @@ let time_sec;
 function time_load() {
     if (localStorage.getItem('time_settings')) {
         time_settings = JSON.parse(localStorage.getItem('time_settings'));
-        time_1 = time_settings[0] * 60;
-        time_2 = time_settings[1] * 60;
-        time_3 = time_settings[2] * 60;
-        time_4 = time_settings[3];
-    }
-    else {
+    } else {
         time_settings = [25, 5, 15, 4];
         localStorage.setItem('time_settings', JSON.stringify(time_settings));
-        time_1 = time_settings[0] * 60;
-        time_2 = time_settings[1] * 60;
-        time_3 = time_settings[2] * 60;
-        time_4 = time_settings[3];
     }
-    time = time_1;
+    time_1 = time_settings[0];
+    time_2 = time_settings[1];
+    time_3 = time_settings[2];
+    time_4 = time_settings[3];
+
+    time = time_1 * 60;
     updateDisplay();
 }
 
@@ -63,37 +59,35 @@ function time_setting() {
 }
 
 function updateDisplay() {
+    time_sec = 0;
     if (isRunning === true) {
         time_min = Math.floor(time / 60);
+        time_sec = time - time_min * 60;
     } else if (parseInt(pomodoro_span.innerHTML) === time_4 & isRest === true) {
-        time_min = time_settings;
+        time_min = time_settings[2];
     } else if (isRest === true) {
-        time_min = time_settings;
+        time_min = time_settings[1];
     } else {
-        time_min = time_settings;
+        time_min = time_settings[0];
     }
 
-    if (time_sec == 0) {
-        console.log(time_min, time_sec);
-        min.innerHTML = time_min;
-        sec.innerHTML = "00";
-    } else if (time_sec < 10 & time_min < 10) {
-        console.log(time_min, time_sec);
+    if (time_sec < 10 & time_min < 10) {
         min.innerHTML = `0${time_min}`;
         sec.innerHTML = `0${time_sec}`;
+    } else if (time_sec === 0) {
+        min.innerHTML = time_min;
+        sec.innerHTML = "00";
     } else if (time_sec < 10) {
-        console.log(time_min, time_sec);
         min.innerHTML = time_min;
         sec.innerHTML = `0${time_sec}`;
     } else if (time_min < 10) {
-        console.log(time_min, time_sec);
         min.innerHTML = `0${time_min}`
         sec.innerHTML = time_sec;
     } else {
-        console.log(time_min, time_sec);
         min.innerHTML = time_min;
         sec.innerHTML = time_sec;
     }
+    console.log(`${time_min}:${time_sec}`);
 }
 
 function button_opt(inner, title) {
@@ -170,71 +164,6 @@ pomodoro.addEventListener('click', function() {
         time_back(parseInt(variable_1), "#b84141");
     }
 });
-
-// function settingsUpdate() {
-//     if (localStorage.getItem('variables')) {
-//         variable_1 = JSON.parse(localStorage.getItem('variables'))[0] * 60;
-//         variable_2 = JSON.parse(localStorage.getItem('variables'))[1] * 60;
-//         variable_3 = JSON.parse(localStorage.getItem('variables'))[2] * 60;
-//         variable_4 = JSON.parse(localStorage.getItem('variables'))[3] * 60;
-//         if (var1.value != "" & var1.value != null & var1.value != undefined & var1.value != isNaN) {
-//             variable_1 = parseInt(var1.value) * 60;
-//         } else {
-//             variable_1 = 25 * 60;
-//         }
-//         if (var2.value != "" & var2.value != null & var2.value != undefined & var2.value != isNaN) {
-//             variable_2 = parseInt(var2.value) * 60;
-//         } else {
-//             variable_2 = 5 * 60;
-//         }
-//         if (var3.value != "" & var3.value != null & var3.value != undefined & var3.value != isNaN) {
-//             variable_3 = parseInt(var3.value) * 60;
-//         } else {
-//             variable_3 = 15 * 60;
-//         }
-//         if (var4.value != "" & var4.value != null & var4.value != undefined & var4.value != isNaN) {
-//             variable_4 = parseInt(var4.value) * 60;
-//         } else {
-//             variable_4 = 4 * 60;
-//         }
-//     } else {
-//         variable_1 = 25 * 60;
-//         variable_2 = 5 * 60;
-//         variable_3 = 15 * 60;
-//         variable_4 = 4 * 60;
-//     }
-//     variables = [variable_1, variable_2, variable_3, variable_4];
-//     localStorage.setItem('variables', JSON.stringify(variables));
-//     time = parseInt(variable_1);
-//     updateDisplay();
-// };
-
-function updateDisplay() {
-    const time_min = Math.floor(time / 60);
-    const time_sec = time - time_min * 60;
-
-    if (time_sec == 0) {
-        console.log(time_min, time_sec);
-        min.innerHTML = time_min;
-        sec.innerHTML = "00";
-    } else if (time_sec < 10 & time_min < 10) {
-        console.log(time_min, time_sec);
-        min.innerHTML = `0${time_min}`;
-        sec.innerHTML = `0${time_sec}`;
-    } else if (time_sec < 10) {
-        console.log(time_min, time_sec);
-        min.innerHTML = time_min;
-        sec.innerHTML = `0${time_sec}`;
-    } else if (time_min < 10) {
-        console.log(time_min, time_sec);
-        min.innerHTML = `0${time_min}`
-        sec.innerHTML = time_sec;
-    } else {
-        console.log(time_min, time_sec);
-        min.innerHTML = time_min;
-        sec.innerHTML = time_sec;
-    }
-}
 
 function button_opt(inner, title) {
     start_button.innerHTML = inner;
