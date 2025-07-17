@@ -11,6 +11,9 @@ const var1 = document.querySelector('#var1');
 const var2 = document.querySelector('#var2');
 const var3 = document.querySelector('#var3');
 const var4 = document.querySelector('#var4');
+const todo_list = document.querySelector('.todo-list');
+const todo_completed = document.querySelector('.todo-completed');
+const todo_list_input = document.querySelector('.todo-list-input');
 
 stop_button.disabled = true;
 let isRunning = false;
@@ -24,6 +27,14 @@ let time_3;
 let time_4;
 let time_min;
 let time_sec;
+let list;
+
+if (localStorage.getItem('list')) {
+    list = JSON.parse(localStorage.getItem('list'));
+} else {
+    list = [];
+    localStorage.setItem('list', JSON.stringify(list));
+}
 
 function time_load() {
     if (localStorage.getItem('time_settings')) {
@@ -171,4 +182,59 @@ settings.addEventListener('click', function() {
     }
 })
 
+function toDoList() {
+
+    todo_list.innerHTML = '';
+    todo_completed.innerHTML = '';
+
+    list.forEach(function(item, i) {
+        let div = document.createElement("div");
+        div.classList.add("todo-item");
+        div.innerHTML = `<div class="text">${item.value}</div>
+                        <div class="buttons">
+                            <button class="btn_todo_complete" title="Выполнено">Выполнено</button>
+                            <button class="btn_todo_remove" title="Удалить">Удалить</button>
+                        </div>`
+    
+        const btn_todo_complete = div.querySelector('.btn_todo_complete');
+        btn_todo_complete.addEventListener('click', function() {
+            item.completed = !item.completed;
+            localStorage.setItem('list', JSON.stringify(list));
+            toDoList();
+        });
+    
+        const btn_todo_remove = div.querySelector('.btn_todo_remove');
+        btn_todo_remove.addEventListener('click', function() {
+            list.splice(i, 1);
+            localStorage.setItem('list', JSON.stringify(list));
+            toDoList();
+        });
+
+        if (item.completed) {
+            todo_completed.append(div);
+        } else {
+            todo_list.append(div);
+        }
+    });
+}
+
+function add() {
+    if (todo_list_input.value.trim() !== "") {
+        let new_todo = {
+            value: todo_list_input.value.trim(),
+            completed: false,
+        };
+        list.push(new_todo);
+        todo_list_input.value = "";
+        localStorage.setItem('list', JSON.stringify(list));
+        toDoList();
+    }
+}
+
+todo_list_input.addEventListener('keyup', function(event) {
+    const key = event.key;
+    if (key === 'Enter') {add()};
+});
+
+toDoList();
 time_load();

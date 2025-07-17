@@ -112,6 +112,16 @@ footer {
     margin-top: 10px;
     border-radius: 10px;
     padding: 10px 0 0 0;
+    background-color: #222121;
+    min-height: 50px;
+}
+
+.todo-list {
+    background-color: #442b2b;
+}
+
+.todo-completed {
+    background-color: #3f4e36;
 }
 
 .todo-item {
@@ -130,8 +140,7 @@ footer {
     font-size: 13px;
 }
 
-.todo-button {
-    width: 30px;
+.btn_todo_complete, .btn_todo_remove {
     height: 25px;
     padding: 5px 0;
     font-size: 12px;
