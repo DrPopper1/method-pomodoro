@@ -14,6 +14,9 @@ const var4 = document.querySelector('#var4');
 const todo_list = document.querySelector('.todo-list');
 const todo_completed = document.querySelector('.todo-completed');
 const todo_list_input = document.querySelector('.todo-list-input');
+const secret_slide = document.querySelector('.secret-slide');
+const left_arrow = document.querySelector('.left-arrow');
+const right_arrow = document.querySelector('.right-arrow');
 
 stop_button.disabled = true;
 let isRunning = false;
@@ -28,6 +31,11 @@ let time_4;
 let time_min;
 let time_sec;
 let list;
+const footer_text = ['Техника Помидора (Pomodoro Technique) – это метод управления временем, предложенный Франческо Чирилло в конце 1980-х годов. Он предполагает разделение работы на 25-минутные интервалы, называемые "помидорами", с последующими короткими перерывами по 5 минут. После четырех "помидоров" делается более длительный перерыв.',
+    '<ol> Суть метода:<li>Определите задачу, над которой будете работать.</li><li>Заведите таймер на 25 минут.</li><li>Не отвлекаясь, работайте над задачей до звонка таймера.</li><li>Как только таймер прозвенел, сделайте 5-минутный перерыв.</li><li>Повторите шаги 2-4 три раза, то есть сделайте три "помидора".</li><li>После четвертого "помидора" сделайте более длительный перерыв, например, 20-30 минут.</li></ol>',
+    '<ol> Преимущества:<li>Короткие интервалы работы и частые перерывы помогают поддерживать высокий уровень концентрации и избегать рассеянности.</li><li>Разделение больших задач на более мелкие, управляемые интервалы, может сделать их менее пугающими и более выполнимыми.</li><li>Регулярные перерывы помогают избежать умственной усталости и выгорания, которые могут возникнуть при длительной непрерывной работе.</li><li>Метод Помидора помогает лучше осознавать, сколько времени уходит на выполнение различных задач, и планировать свою работу более эффективно.</li></ol>'
+];
+let count = 0;
 
 if (localStorage.getItem('list')) {
     list = JSON.parse(localStorage.getItem('list'));
@@ -35,6 +43,24 @@ if (localStorage.getItem('list')) {
     list = [];
     localStorage.setItem('list', JSON.stringify(list));
 }
+
+left_arrow.addEventListener('click', function() {
+    if (count === 0) {
+        count = 2;
+    } else {
+        count -= 1;
+    }
+    secret_slide.innerHTML = footer_text[count];
+});
+
+right_arrow.addEventListener('click', function() {
+    if (count === 2) {
+        count = 0;
+    } else {
+        count += 1;
+    }
+    secret_slide.innerHTML = footer_text[count];
+});
 
 function time_load() {
     if (localStorage.getItem('time_settings')) {
@@ -235,6 +261,8 @@ todo_list_input.addEventListener('keyup', function(event) {
     const key = event.key;
     if (key === 'Enter') {add()};
 });
+
+
 
 toDoList();
 time_load();
